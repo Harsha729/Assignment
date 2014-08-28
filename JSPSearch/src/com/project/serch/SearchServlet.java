@@ -1,5 +1,6 @@
 package com.project.serch;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -30,7 +31,7 @@ public class SearchServlet extends HttpServlet {
 				int id = searchresults.getInt("category_id");
 				int rating = searchresults.getInt("rating");
 
-				//System.out.println("VALUES ARE" + bookname + id + rating);
+				// System.out.println("VALUES ARE" + bookname + id + rating);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -42,7 +43,7 @@ public class SearchServlet extends HttpServlet {
 			searchresults = context.executeSearch(searchname, searchtype);
 			try {
 				String bookname = searchresults.getString("bookname");
-				//System.out.println("VALUES ARE" + bookname);
+				// System.out.println("VALUES ARE" + bookname);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,10 +53,17 @@ public class SearchServlet extends HttpServlet {
 		else if (searchtype.equals("name")) {
 			context = new SearchContext(new NameSearch());
 			searchresults = context.executeSearch(searchname, searchtype);
+			request.setAttribute("resultset",searchresults );
 			try {
 				String bookname = searchresults.getString("username");
-				//System.out.println("VALUES ARE" + bookname);
+				System.out.println("VALUES ARE" + bookname);
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				response.sendRedirect("NameDetails.jsp");
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -73,5 +81,4 @@ public class SearchServlet extends HttpServlet {
 			}
 		}
 	}
-
 }

@@ -5,10 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Search Box</title>
+<script>
+function validateForm(){
+	var searchVariable = document.forms["myform"]["search"].value;
+	if (searchVariable==null || searchVariable==""){
+		alert("Enter the search Variable");
+		return false;
+	}
+}
+
+</script>
 </head>
 <body>
-	<form action="SearchServlet" method="get">
-		<h4>Search Box</h4>
+	<form action="SearchServlet" method="get" name="myform" onsubmit="return validateForm()">
+		<h4>Place Order</h4>
 		<table>
 			<TR>
 				<TD><Strong>Search</Strong></TD>

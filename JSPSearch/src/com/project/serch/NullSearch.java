@@ -6,8 +6,6 @@ import java.sql.Statement;
 import java.sql.Connection;
 
 
-
-
 public class NullSearch implements SearchOperation {
 
 	JDBCConnectionFactory factory = JDBCConnectionFactory.getFactory();
