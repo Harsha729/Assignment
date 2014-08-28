@@ -3,27 +3,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BitCoinTotal extends PriceDecorator {
 
+public class ActualPrice implements OrderPriceCalculator {
 
-	public BitCoinTotal(OrderPriceCalculator bookTotal) {
-		super(bookTotal);
-	}
-
+	JDBCConnectionFactory factory = JDBCConnectionFactory.getFactory();
+	Connection connection = factory.setConnection();
+	
 	@Override
 	public int calculate(String isbn) {
-		// TODO Auto-generated method stub
-		JDBCConnectionFactory factory = JDBCConnectionFactory.getFactory();
-		Connection connection = factory.setConnection();
+		// TODO Auto-generated method stub	
 		int total;
 		String sql = "SELECT * FROM books where ISBN = '" + isbn + "'";
 		Statement statement;
 		try {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
-			while (rs.next()) {
+			while(rs.next()){
 				total = rs.getInt("price");
-				return total + 2;
+				return total;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

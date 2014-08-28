@@ -3,13 +3,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BitCoinTotal extends PriceDecorator {
 
-
-	public BitCoinTotal(OrderPriceCalculator bookTotal) {
+public class CreditCardTotal extends PriceDecorator {
+	
+	public CreditCardTotal(OrderPriceCalculator bookTotal){
 		super(bookTotal);
 	}
-
+	
 	@Override
 	public int calculate(String isbn) {
 		// TODO Auto-generated method stub
@@ -23,13 +23,15 @@ public class BitCoinTotal extends PriceDecorator {
 			ResultSet rs = statement.executeQuery(sql);
 			while (rs.next()) {
 				total = rs.getInt("price");
-				return total + 2;
+				return total + 10;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;		
+		return 0;
 	}
 
+
+	
 }
